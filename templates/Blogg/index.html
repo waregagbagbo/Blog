@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<style>
+  section{
+    padding:30px;
+  }
+</style>
+<section>
+  <div class="row">
+  {% for books in book%} 
+  <div class="col-sm-3">
+    <div class="card" style="width:40em;">
+      <img src="{{books.image.url}}">
+      <div class="card-body">
+        <h5 class="card-title">{{books.name}}</h5>
+        <p class="card-text">{{books.description}}</p>
+        <p class="card-text">Ksh,{{books.price}}</p>
+        <a href="#" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
+  </div>  
+  {%endfor%} 
+</section>
+{% endblock %}
