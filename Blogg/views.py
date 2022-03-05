@@ -1,11 +1,19 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import*
 from .forms import BookForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 def index(request):
-    book = Book.objects.all()    
+    book = Book.objects.all()  
+
+    # add pagination
+    paginator = Paginator(book,3) # show 3 per page    
+    page_number = request.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'Blogg/index',{'page_obj':page_obj})
+
     context={
         'book':book,
     }
@@ -54,5 +62,7 @@ def delete_book(request,book_id):
         return render('index')
     booktpe.delete()
     return redirect('index')
+
+
 
 
