@@ -8,23 +8,26 @@
   .footer-color{
     color:#fff;
   }
+  #row{
+    margin:12px;
+    padding:8px;
+  }
 </style>
 <section>
   <div class="row">
   {% for books in page_obj%} 
-  <div class="col-sm-3">
+  <div class="col-sm-4">
     <div class="card" style="width:40em;">
       <img src="{{books.image.url}}">
       <div class="card-body">
-        <h5 class="card-title">{{books.name}}</h5>
-        <p class="card-text">{{books.description}}</p>
-        <p class="card-text">Ksh,{{books.price}}</p>
+        <h5 class="card-title" style="font-size:15;font-weight:900; color:#000;">{{books.name}}</h5>
+        <p class="card-text" style="color:#000; flood-opacity: 1;">{{books.description}}</p>
         <a href="#" class="btn btn-primary">Read More</a>
       </div>
     </div>
   </div>  
   {%endfor%}
-  <div>
+  <div id ='row'>
     <div class="pagination">
       <span class="step-links">
           {% if page_obj.has_previous %}

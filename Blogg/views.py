@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 def index(request):
     book = Book.objects.all() 
     # add pagination
-    paginator = Paginator(book,2) # show 3 per page    
+    paginator = Paginator(book,3) # show 3 per page    
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
