@@ -15,7 +15,8 @@ class Profile(models.Model):
 
 class Post(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE) 
-    title = models.CharField(max_length=200,blank=False)   
+    title = models.CharField(max_length=200,blank=False) 
+    category = models.CharField(max_length=20,blank=False)  
     comments = models.TextField(blank=False)
 
     def __str__(self):
