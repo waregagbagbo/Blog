@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Profile(models.Model):
     first_name = models.CharField(max_length=20,null=True)
@@ -12,15 +13,29 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-
+#define the post status to act as the dropdown in the model
+STATUS =(
+    (0,'Draft'),
+    (1,'Published'),
+    (2,'Pending'),
+)
 class Post(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE) 
     title = models.CharField(max_length=200,blank=False) 
-    category = models.CharField(max_length=20,blank=False)  
+    slug = models.SlugField(max_length=100,unique=True, null=True) 
+    updated_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     comments = models.TextField(blank=False)
+    status = models.CharField(max_length=20,choices=STATUS,default='draft')
+
+    #let us define metadata which will be used to query data 
+    class Meta:
+        ordering = ['-created_on']
+
 
     def __str__(self):
         return "%s" %(self.title)
+
 
     
 class Category(models.Model):

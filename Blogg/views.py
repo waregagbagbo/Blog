@@ -2,6 +2,8 @@ from django.shortcuts import render,HttpResponse,redirect
 from .models import*
 from .forms import BookForm
 from django.core.paginator import Paginator
+from django.views.generic import ListView,DetailView
+
 
 # Create your views here.
 
@@ -61,6 +63,25 @@ def delete_book(request,book_id):
         return render('index')
     booktpe.delete()
     return redirect('index')
+
+
+#use CBV to set the post views
+'''class PostPageList(ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'Blogg/post_page.html'''''
+
+# for detail post
+'''class PostDetailView(DetailView):
+    #model = Post
+    queryset = Post.objects.all()
+    template_name = 'post_detail_page.html'''''
+
+def PostPage(request):
+    post= Post.objects.filter(status=1).order_by('-created_on')
+    context = {
+        'post':post
+    }
+    return render(request,'Blogg/post_page.html',context)
 
 
 
