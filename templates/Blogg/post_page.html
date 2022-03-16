@@ -5,12 +5,12 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
-            {% for posts in post %}
+            {% for pos in posts %}
             <div class="card mb-4">
                 <div class="card-body">
-                    <h2 class="card-title">{{ posts.title }}</h2>
-                    <p class="card-text text-muted h6">{{ posts.author }} | {{ posts.created_on}} </p>
-                    <p class="card-text">{{posts.content|slice:":200" }}</p>
+                    <h2 class="card-title">{{ pos.title }}</h2>
+                    <p class="card-text text-muted h6">{{ pos.author }} | {{ pos.created_on}} </p>
+                    <p class="card-text">{{pos.content|slice:":200" }}</p>
                     <a href="{% url 'post_detail' posts.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
             </div>

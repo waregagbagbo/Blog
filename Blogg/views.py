@@ -77,9 +77,9 @@ def delete_book(request,book_id):
     template_name = 'post_detail_page.html'''''
 
 def PostPage(request):
-    post= Post.objects.filter(status=1).order_by('-created_on')
+    posts= Post.objects.filter(status=1).order_by('-created_on')
     context = {
-        'post':post
+        'posts':posts
     }
     return render(request,'Blogg/post_page.html',context)
 

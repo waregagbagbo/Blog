@@ -19,14 +19,16 @@ STATUS =(
     (1,'Published'),
     (2,'Pending'),
 )
+
+
 class Post(models.Model):
-    profile = models.ForeignKey(Profile,on_delete=models.CASCADE) 
+    profile = models.ForeignKey(Profile, models.SET_NULL,null=True, blank=True) 
     title = models.CharField(max_length=200,blank=False) 
     slug = models.SlugField(max_length=100,unique=True, null=True) 
     updated_on = models.DateTimeField(auto_now=True)
-    created_on = models.DateTimeField(auto_now_add=True)
     comments = models.TextField(blank=False)
-    status = models.CharField(max_length=20,choices=STATUS,default='draft')
+    created_on = models.DateTimeField(auto_now_add=True)   
+    status = models.IntegerField(choices=STATUS, default=0)
 
     #let us define metadata which will be used to query data 
     class Meta:
