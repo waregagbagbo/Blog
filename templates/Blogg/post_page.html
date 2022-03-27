@@ -5,13 +5,13 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
-            {% for pos in posts %}
+            {% for i in queryset %}
             <div class="card mb-4">
                 <div class="card-body">
-                    <h2 class="card-title">{{ pos.title }}</h2>
-                    <p class="card-text text-muted h6">{{ pos.author }} | {{ pos.created_on}} </p>
-                    <p class="card-text">{{pos.content|slice:":200" }}</p>
-                    <a href="{% url 'post_detail' posts.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    <h2 class="card-title">{{ i.title }}</h2>
+                    <p class="card-text text-muted h6">{{ i.author }} | {{ i.created_on}} </p>
+                    <p class="card-text">{{i.content|slice:":200" }}</p>
+                    <a href="{% url 'post_detail' i.slug  %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
             </div>
             {% endfor %}

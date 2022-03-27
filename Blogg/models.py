@@ -15,9 +15,9 @@ class Profile(models.Model):
 
 #define the post status to act as the dropdown in the model
 STATUS =(
-    (0,'Draft'),
-    (1,'Published'),
-    (2,'Pending'),
+    ('dr','Draft'),
+    ('pub','Published'),
+    ('pen','Pending'),
 )
 
 
@@ -28,7 +28,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     comments = models.TextField(blank=False)
     created_on = models.DateTimeField(auto_now_add=True)   
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.CharField(max_length=20, choices=STATUS, default='dr')
 
     #let us define metadata which will be used to query data 
     class Meta:

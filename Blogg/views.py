@@ -75,14 +75,21 @@ def delete_book(request,book_id):
     #model = Post
     queryset = Post.objects.all()
     template_name = 'post_detail_page.html'''''
-
 def PostPage(request):
-    posts= Post.objects.filter(status=1).order_by('-created_on')
+    queryset= Post.objects.filter(status='dr').order_by('-created_on')
     context = {
-        'posts':posts
+        'queryset':queryset
     }
     return render(request,'Blogg/post_page.html',context)
 
+# let us run the post detail section
 
+def PostDetailPage(request,slug):
+    # run the query
+    posting = Post.objects.get(slug=slug)
+    context ={
+        'posting':posting
+    }
+    return render(request,'Blogg/post_detail.html',context)
 
 
