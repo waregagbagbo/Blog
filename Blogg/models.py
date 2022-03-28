@@ -15,9 +15,9 @@ class Profile(models.Model):
 
 #define the post status to act as the dropdown in the model
 STATUS =(
-    ('dr','Draft'),
-    ('pub','Published'),
-    ('pen','Pending'),
+    ('Dr',"Draft"),
+    ('Pub',"Published"),
+    ('Pn',"Pending"),
 )
 
 
@@ -26,14 +26,13 @@ class Post(models.Model):
     title = models.CharField(max_length=200,blank=False) 
     slug = models.SlugField(max_length=100,unique=True, null=True) 
     updated_on = models.DateTimeField(auto_now=True)
-    comments = models.TextField(blank=False)
-    created_on = models.DateTimeField(auto_now_add=True)   
-    status = models.CharField(max_length=20, choices=STATUS, default='dr')
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True, null=True)   
+    status = models.CharField(max_length=20, choices=STATUS, default='Dr')
 
     #let us define metadata which will be used to query data 
     class Meta:
         ordering = ['-created_on']
-
 
     def __str__(self):
         return "%s" %(self.title)

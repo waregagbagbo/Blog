@@ -11,5 +11,5 @@ urlpatterns=[
     path('update/<int:book_id>',views.updateBook, name= 'update'),
     path('delete/<int:book_id>', views.delete_book, name='delete'),
     path('postings/', views.PostPage,name='postings'),
-    path('slug:slug>',views.PostDetailPage, name='detail'),
+    path('<slug:slug>',views.PostDetailPage, name='detail'),
 ]

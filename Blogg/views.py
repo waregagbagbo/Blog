@@ -65,18 +65,8 @@ def delete_book(request,book_id):
     return redirect('index')
 
 
-#use CBV to set the post views
-'''class PostPageList(ListView):
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
-    template_name = 'Blogg/post_page.html'''''
-
-# for detail post
-'''class PostDetailView(DetailView):
-    #model = Post
-    queryset = Post.objects.all()
-    template_name = 'post_detail_page.html'''''
 def PostPage(request):
-    queryset= Post.objects.filter(status='dr').order_by('-created_on')
+    queryset = Post.objects.filter(status='Pub').order_by('-created_on')
     context = {
         'queryset':queryset
     }
@@ -85,10 +75,9 @@ def PostPage(request):
 # let us run the post detail section
 
 def PostDetailPage(request,slug):
-    # run the query
-    posting = Post.objects.get(slug=slug)
+    post= Post.objects.get(slug=slug)
     context ={
-        'posting':posting
+        'post':post
     }
     return render(request,'Blogg/post_detail.html',context)
 
