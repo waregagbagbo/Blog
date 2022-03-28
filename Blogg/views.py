@@ -10,7 +10,7 @@ from django.views.generic import ListView,DetailView
 def index(request):
     book = Book.objects.all() 
     # add pagination
-    paginator = Paginator(book,3) # show 3 per page    
+    paginator = Paginator(book,9) # show 6   per page    
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -66,7 +66,7 @@ def delete_book(request,book_id):
 
 
 def PostPage(request):
-    queryset = Post.objects.filter(status='Pub').order_by('-created_on')
+    queryset = Post.objects.filter(status='').order_by('-created_on')
     context = {
         'queryset':queryset
     }
