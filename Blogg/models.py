@@ -22,7 +22,7 @@ STATUS =(
 
 
 class Post(models.Model):
-    profile = models.ForeignKey(Profile, models.SET_NULL,null=True, blank=True) 
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True) 
     title = models.CharField(max_length=200,blank=False) 
     slug = models.SlugField(max_length=100,unique=True, null=True) 
     updated_on = models.DateTimeField(auto_now=True)
