@@ -21,8 +21,8 @@
       <img src="{{books.image.url}}">
       <div class="card-body">
         <h5 class="card-title" style="font-size:15;font-weight:900; color:#000;">{{books.name}}</h5>
-        <p class="card-text" style="color:#000; flood-opacity: 1;">{{books.description}}</p>
-        <a href="#" class="btn btn-primary">Read More</a>
+        <p class="card-text" style="color:#000; flood-opacity: 1;">{{books.description | slice:":170"}}..</p>
+        <a href="{%url 'book_detail' books.id %}" class="btn btn-primary">Read More</a>
       </div>
     </div>
   </div>  
