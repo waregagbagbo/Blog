@@ -43,7 +43,7 @@ def upload(request):
 def updateBook(request,book_id):
     book_id =int(book_id)
     try:
-        booktpe = Book.objects.get(id=book_id)
+        booktype = Book.objects.get(id=book_id)
     except BookDoesNotExist:
         return redirect('index')
         book_form = BookForm(request.Post, request.files)
@@ -82,3 +82,9 @@ def PostDetailPage(request,slug):
     return render(request,'Blogg/post_detail.html',context)
 
 
+def BookDetail(request,id):
+    books = Book.objects.get(id=id)
+    context={
+        'books':books,
+    }
+    return render(request,'Blogg/book_detail.html',context)
