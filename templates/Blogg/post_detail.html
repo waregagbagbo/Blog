@@ -1,14 +1,20 @@
 {%extends 'base.html'%}
 
 {% block content %}
+<style>
+  section{
+    padding:20px;
+    margin:20px;
+  }
+</style>
 <div class="section">
     <div class="row">
       <div class="col-md-8 card mb-4  mt-3 left  top">
         {% for pos in posts %}
-        <div class="card-body">
+        <div class="card-body" style="padding:20px;background-color:#f2f2f2">
           <h1>{% block title %} {{pos.title }} {% endblock title %}</h1>
           <p class=" text-muted">{{pos.author }} | {{ pos.created_on }}</p>
-          <p class="card-text ">{{ pos.body | safe }}</p>
+          <p class="card-text" style="padding:8px;">{{ pos.body | safe }}</p>
         </div>
         <a href="{% url 'postings'%}" class="btn btn-primary">Back &rarr;</a> 
         {% endfor %}

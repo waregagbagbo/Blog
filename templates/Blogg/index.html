@@ -15,12 +15,18 @@
   .card-body{
     background-color:#f2f2f2;
   }
+  img{
+    border-radius:10px;
+  }
+  card{
+    margin:2px;
+  }
 </style>
 <section>
   <div class="row">
   {% for books in page_obj%} 
-  <div class="col-sm-4">
-    <div class="card" style="width:40em;">
+  <div class="col-sm-4" style="padding:15px;">
+    <div class="card" style="width:40em;padding:10px;margin-top:10px;">
       <img src="{{books.image.url}}" width='400px',height='200px',alt='image'>
       <div class="card-body">
         <h5 class="card-title" style="font-size:15;font-weight:900; color:#000;">{{books.name}}</h5>
