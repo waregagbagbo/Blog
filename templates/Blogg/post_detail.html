@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 
 {% block content %}
-<div class="container">
+<div class="section">
     <div class="row">
       <div class="col-md-8 card mb-4  mt-3 left  top">
         {% for pos in posts %}
@@ -17,6 +17,5 @@
       {% include 'partials/sidebar.html' %} 
       {% endblock sidebar %}
     </div>
-  </div>
-  
-  {%endblock%}
+</div>
+{%endblock%}

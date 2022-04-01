@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% block content %}
 
-  <div class="container">
+  <div class="section">
       <div class="row">
         <div class="col-md-8 card mb-4  mt-3 left  top">
           <div class="card-body">
@@ -11,7 +11,7 @@
               <p class="card-text"> Published in:{{ books.year_published }}</p>
               <p class="card-text"> Market Price:{{books.price }}</p>
               <div class="bt">                
-                <button class="button"  {{books.read_more}}>Download Now</button>
+                <button class="button"  {{books.read_more}}>Know More!</button>
               </div>
           </div>
           <a href="{% url 'index'%}" class="btn btn-primary">Back &rarr;</a> 
