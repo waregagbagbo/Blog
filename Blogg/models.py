@@ -53,6 +53,7 @@ class Book(models.Model):
     description = models.CharField(max_length=500)
     year_published = models.DateField(null=False)
     price = models.IntegerField()
+    read_more = models.URLField(max_length=200, unique=True, null=True,default=True)
 
     def __str__(self):
         return '%s'%(self.name)

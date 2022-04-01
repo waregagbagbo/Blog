@@ -4,12 +4,14 @@
 <div class="container">
     <div class="row">
       <div class="col-md-8 card mb-4  mt-3 left  top">
+        {% for pos in posts %}
         <div class="card-body">
-          <h1>{% block title %} {{post.title }} {% endblock title %}</h1>
-          <p class=" text-muted">{{ post.uthor }} | {{ post.created_on }}</p>
-          <p class="card-text ">{{ post.body | safe }}</p>
+          <h1>{% block title %} {{pos.title }} {% endblock title %}</h1>
+          <p class=" text-muted">{{pos.author }} | {{ pos.created_on }}</p>
+          <p class="card-text ">{{ pos.body | safe }}</p>
         </div>
         <a href="{% url 'postings'%}" class="btn btn-primary">Back &rarr;</a> 
+        {% endfor %}
       </div>
       {% block sidebar %} 
       {% include 'partials/sidebar.html' %} 

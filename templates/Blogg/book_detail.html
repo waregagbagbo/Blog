@@ -1,15 +1,25 @@
 {% extends 'base.html'%}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
 
-              {{books.name}}
-
-        </div>
-
+  <div class="container">
+      <div class="row">
+        <div class="col-md-8 card mb-4  mt-3 left  top">
+          <div class="card-body">
+              <h1>{% block title %} {{books.name }} {% endblock title %}</h1>
+              <p class=" text-muted">Author:{{ books.author }} Category:| {{ books.category }}</p>
+              <p class="card-text ">{{ books.description | safe }}</p>
+              <p class="card-text"> Published in:{{ books.year_published }}</p>
+              <p class="card-text"> Market Price:{{books.price }}</p>
+              <div class="bt">                
+                <button class="button"  {{books.read_more}}>Download Now</button>
+              </div>
+          </div>
+          <a href="{% url 'index'%}" class="btn btn-primary">Back &rarr;</a> 
+      </div>
+      {% block sidebar %} 
+      {% include 'partials/sidebar.html' %} 
+      {% endblock sidebar %}
     </div>
-</div>
-
+  </div>
 
 {% endblock %}
