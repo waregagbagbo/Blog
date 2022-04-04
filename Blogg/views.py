@@ -21,6 +21,40 @@ def index(request):
     return render(request,'Blogg/index.html',context)
 
 
+# shows the books detail view part function
+def BookDetail(request,id):
+    books = Book.objects.get(id=id)
+    context={
+        'books':books,
+    }
+    return render(request,'Blogg/book_detail.html',context)
+
+
+
+# displays posts lists as per the currently published from the databse
+def PostPage(request):
+    queryset = Post.objects.filter(status='Pub').order_by('-created_on')
+
+    paginator = Paginator(queryset,4) # show 4 posttings per page    
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'queryset':queryset,
+        'page_obj': page_obj
+    }
+    return render(request,'Blogg/post_page.html',context)
+
+# let us run the post detail section for the posts
+def PostDetailPage(request,slug):
+    #= Post.objects.get(slug=slug)
+    posts = Post.objects.filter(slug=slug)
+    context ={
+        'posts':posts
+    }
+    return render(request,'Blogg/post_detail.html',context)
+
+
+
 def upload(request):
     #instantiate the form
     form = BookForm()
@@ -31,7 +65,7 @@ def upload(request):
             form.save()
             return redirect('index')
         else:
-            return HttpResponse('''errorin your upload,  kindly reload here''')
+            return HttpResponse('''error in your upload,  kindly reload here''')
     else:
         form = BoookForm()
         context ={
@@ -40,6 +74,9 @@ def upload(request):
         return render(request,'Blogg/upload.html',context)
 
 
+
+
+# displays book detail function view
 def updateBook(request,book_id):
     book_id =int(book_id)
     try:
@@ -52,40 +89,13 @@ def updateBook(request,book_id):
             return redirect('index')
     return render(request,'Blogg/update.html')
 
-
-
 # perfoms deletion of the item
-def delete_book(request,book_id):
+"""def delete_book(request,book_id):
     book_id = int(book_id)
     try:
         booktpe = Book.objects.gt(id=book_id)
     except BookDoesNotExist:
         return render('index')
     booktpe.delete()
-    return redirect('index')
+    return redirect('index')"""
 
-
-def PostPage(request):
-    queryset = Post.objects.filter(status='Pub').order_by('-created_on')
-    context = {
-        'queryset':queryset
-    }
-    return render(request,'Blogg/post_page.html',context)
-
-# let us run the post detail section
-
-def PostDetailPage(request,slug):
-    #= Post.objects.get(slug=slug)
-    posts = Post.objects.filter(slug=slug)
-    context ={
-        'posts':posts
-    }
-    return render(request,'Blogg/post_detail.html',context)
-
-
-def BookDetail(request,id):
-    books = Book.objects.get(id=id)
-    context={
-        'books':books,
-    }
-    return render(request,'Blogg/book_detail.html',context)
