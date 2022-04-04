@@ -1,10 +1,10 @@
 from django import forms
-from .models import Book
+from .models import Post
 
-class BookForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
 
     class Meta:
-        model = Book
+        model = Post
         fields ='__all__'
 
 

@@ -1,12 +1,11 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import*
-from .forms import BookForm
+from .forms import PostForm
 from django.core.paginator import Paginator
 from django.views.generic import ListView,DetailView
 
 
 # Create your views here.
-
 def index(request):
     book = Book.objects.all() 
     # add pagination
@@ -28,7 +27,6 @@ def BookDetail(request,id):
         'books':books,
     }
     return render(request,'Blogg/book_detail.html',context)
-
 
 
 # displays posts lists as per the currently published from the databse
@@ -53,27 +51,24 @@ def PostDetailPage(request,slug):
     }
     return render(request,'Blogg/post_detail.html',context)
 
-
-
+# section to enable form inputs
 def upload(request):
     #instantiate the form
-    form = BookForm()
-    #checcks  whether the user is visiting the form for the first time or data is being submitted
+    form = PostForm()
+    #checks  whether the user is visiting the form for the first time or data is being submitted
     if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
+        form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('postings')
         else:
-            return HttpResponse('''error in your upload,  kindly reload here''')
+            return HttpResponse('error in your upload,kindly reload here')
     else:
-        form = BoookForm()
+        form = PostForm()
         context ={
             'form':form
         }
-        return render(request,'Blogg/upload.html',context)
-
-
+        return render(request,'Blogg/public_post.html',context)
 
 
 # displays book detail function view
