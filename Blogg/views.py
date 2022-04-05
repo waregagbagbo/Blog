@@ -53,7 +53,7 @@ def PostDetailPage(request,slug):
     return render(request,'Blogg/post_detail.html',context)
 
 # section to enable form inputs
-@login_required
+@login_required(login_url='login')
 def upload(request):
     #instantiate the form
     form = PostForm()

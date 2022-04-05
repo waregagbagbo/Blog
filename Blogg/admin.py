@@ -11,10 +11,10 @@ class PostAdmin(admin.ModelAdmin):
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('name','image','author','price')
-    list_filter = ('id')
+    
 
 admin.site.register(Profile)
 admin.site.register(Post,PostAdmin)
 admin.site.register(Category)
-admin.site.register(Book)
+admin.site.register(Book,BookAdmin)
 admin.site.register(Author)
