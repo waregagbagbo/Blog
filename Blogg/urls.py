@@ -12,4 +12,12 @@ urlpatterns=[
     path('postings/', views.PostPage,name='postings'),
     path('<slug:slug>',views.PostDetailPage, name='detail'),
     path('<int:id>/',views.BookDetail, name='book_detail'),
+
+ # For authentication section
+
+
+
+
+
+
 ]

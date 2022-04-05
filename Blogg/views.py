@@ -3,7 +3,8 @@ from .models import*
 from .forms import PostForm
 from django.core.paginator import Paginator
 from django.views.generic import ListView,DetailView
-
+from django.contrib.auth import  authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -52,6 +53,7 @@ def PostDetailPage(request,slug):
     return render(request,'Blogg/post_detail.html',context)
 
 # section to enable form inputs
+@login_required
 def upload(request):
     #instantiate the form
     form = PostForm()
@@ -60,7 +62,7 @@ def upload(request):
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('postings')
+            #return redirect('postings')
         else:
             return HttpResponse('error in your upload,kindly reload here')
     else:
@@ -94,3 +96,21 @@ def updateBook(request,book_id):
     booktpe.delete()
     return redirect('index')"""
 
+    # Authentication
+
+def VisitorLogin(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        redirect('upload')
+        
+    else:
+        return HttpResponse('Incorrect details, getting signed off')
+        redirect('postings')
+
+    return render(request,'Accounts/login.html')
+
+def logout(request):
+    return render('signout')
