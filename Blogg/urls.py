@@ -14,10 +14,7 @@ urlpatterns=[
     path('<int:id>/',views.BookDetail, name='book_detail'),
 
  # For authentication section
-
-
-
-
-
+path('login/',views.VisitorLogin, name='login'),
+path('register/', views.registerPage, name="register"),
 
 ]

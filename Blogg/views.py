@@ -98,6 +98,30 @@ def updateBook(request,book_id):
 
     # Authentication
 
+def registerPage(request):
+    if request.method == "POST":
+        #then creat an instance object by
+       form = CustomUserCreationForm(request.POST)
+       # theafter check if valid
+       if form.is_valid():
+           form.save()
+           username = form.cleaned_data.get('username')
+           password = form.cleaned_data.get('password1')
+           user = authenticate(request,username=username,password=password)
+           messages.SUCCESS(request,'Succcessful registration')
+           login(request,user)                
+           return redirect('upload')
+       else:
+           messages.ERROR(request,'Invalid')
+           messages.ERROR(request,form.erros)
+    else:
+        form = CustomUserCreationForm()
+    context={
+        'form':form
+        }
+    return render(request,'Accounts/register.html',context)
+
+
 def VisitorLogin(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -107,10 +131,12 @@ def VisitorLogin(request):
         redirect('upload')
         
     else:
-        return HttpResponse('Incorrect details, getting signed off')
+        return HttpResponse('Incorrect details,please sign in')
         redirect('postings')
 
-    return render(request,'Accounts/login.html')
+    return render(request,'Accounts/user_login.html')
 
-def logout(request):
-    return render('signout')
+
+def logout_view(request):
+    logout(request)
+    # Redirect to a su
